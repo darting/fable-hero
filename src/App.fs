@@ -1,4 +1,4 @@
-module FableHero
+module FableHero.App
 
 open Fable.Core
 open Fable.Core.JsInterop
