@@ -2,14 +2,19 @@ STORAGE: NONE
 RESTRICTION: == netstandard2.0
 NUGET
   remote: https://www.nuget.org/api/v2
-    dotnet-fable (1.3.11) - clitool: true
-    Fable.Core (1.3.11)
+    dotnet-fable (1.3.12) - clitool: true
+    Fable.Core (1.3.12)
       FSharp.Core (>= 4.2.3)
       NETStandard.Library (>= 1.6.1)
     Fable.Elmish (2.0.0-beta-2)
       Fable.Core (>= 1.3.8)
       Fable.PowerPack (>= 1.3.4)
       FSharp.Core (>= 4.3.2)
+    Fable.Elmish.Browser (2.0.0-beta-1)
+      Fable.Core (>= 1.3.8)
+      Fable.Elmish (>= 2.0.0-beta-1)
+      Fable.Import.Browser (>= 1.1.1)
+      FSharp.Core (>= 4.3.3)
     Fable.Elmish.React (2.0.0-beta-2)
       Fable.Core (>= 1.3.8)
       Fable.Elmish (>= 2.0.0-beta-1)

@@ -1,6 +1,19 @@
 module FableHero.Types
 
 
+type User = {
+    Name : string
+    Balance : decimal
+}
+
+type Guest = {
+    Name : string
+}
+
+type Player = 
+    | LoggedIn of User
+    | Guest of Guest
+
 type HorseID = int 
 
 type Horse = {
@@ -12,13 +25,22 @@ type Multiplier = int
 
 type Odds = (Horse * Multiplier) list
 
-type Model = {
+type Page =
+    | Login
+    | Main
+
+type GameState = {
+    Player : Player
     Round : int    
     Result : Horse list
     Odds : Odds
+    Page : Page
 }
 
 type Msg = 
+    | UpdateUserName of string
+    | SignOut
+    | SignIn
     | Race
     | Bet of HorseID * decimal
 
@@ -43,7 +65,12 @@ let shuffle (items : List<'T>) = List.sortBy (fun _ -> rnd.NextDouble()) items
 let odds horses : Odds =
     List.zip horses (shuffle pays)
 
-let init () : Model = { Round = 1; Result = horses; Odds = odds horses }
+let zero () : GameState = { 
+    Player = Guest { Name = "" }
+    Round = 1
+    Result = horses
+    Odds = odds horses
+    Page = Login }
 
 let race () = shuffle horses
 

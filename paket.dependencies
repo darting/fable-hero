@@ -1,6 +1,7 @@
 source https://nuget.org/api/v2
 storage: none
 framework: netstandard2.0
+nuget Fable.Elmish.Browser >= 2.0.0-beta-1
 nuget FSharp.Core  redirects:force, content:none
 nuget Fable.Core
 nuget Fable.Elmish prerelease
