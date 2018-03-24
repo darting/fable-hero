@@ -87,7 +87,7 @@ let zero () : State = {
     Player = Guest { Name = ""; Balance = 1000m }
     Current = newGame ()
     History = []
-    Page = Main }
+    Page = Login }
 
 let race () = shuffle horses
 
