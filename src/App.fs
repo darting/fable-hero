@@ -69,7 +69,17 @@ let gameHistoryView (game : Game) =
 
 let historyView (games : List<Game>) = 
     R.table [ ClassName "table table-bordered table-sm" ] [ 
-        R.thead [  ] [ R.th [ ColSpan 9.0 ] [ R.str "历史记录" ] ]
+        R.thead [  ] [ 
+            R.th [ ] [ R.str "期数" ] 
+            R.td [] [ R.str "第一名" ]
+            R.td [] [ R.str "第二名" ]
+            R.td [] [ R.str "第三名" ]
+            R.td [] [ R.str "第四名" ]
+            R.td [] [ R.str "第五名" ]
+            R.td [] [ R.str "第六名" ]
+            R.td [] [ R.str "第七名" ]
+            R.td [] [ R.str "第八名" ]
+        ]
         games 
         |> List.map gameHistoryView
         |> R.tbody [] ]
