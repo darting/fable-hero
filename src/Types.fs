@@ -1,18 +1,22 @@
 module FableHero.Types
 
 
+type MaybeBuilder () = 
+    member __.Zero () = None
+    member __.Bind (m, f) = Option.bind f m
+    member __.Return v = Some v
+    member __.ReturnFrom m = m
+
+let maybe = MaybeBuilder ()
+
 type User = {
     Name : string
     Balance : decimal
 }
 
-type Guest = {
-    Name : string
-}
-
 type Player = 
     | LoggedIn of User
-    | Guest of Guest
+    | Guest of User
 
 type HorseID = int 
 
@@ -29,11 +33,16 @@ type Page =
     | Login
     | Main
 
-type GameState = {
+type Game = 
+    { RoundID : int
+      Result : Horse list
+      Bets : (HorseID * decimal * decimal) list // horse * wager * win
+      Odds : Odds }
+
+type State = {
     Player : Player
-    Round : int    
-    Result : Horse list
-    Odds : Odds
+    Current : Game
+    History : Game list
     Page : Page
 }
 
@@ -65,12 +74,20 @@ let shuffle (items : List<'T>) = List.sortBy (fun _ -> rnd.NextDouble()) items
 let odds horses : Odds =
     List.zip horses (shuffle pays)
 
-let zero () : GameState = { 
-    Player = Guest { Name = "" }
-    Round = 1
-    Result = horses
-    Odds = odds horses
-    Page = Login }
+let newGame = 
+    let mutable round = 0
+    fun () ->
+        round <- round + 1
+        { RoundID = round
+          Result = []
+          Bets = []
+          Odds = horses |> shuffle |> odds |> List.sortBy (fun (h,_) -> h.ID) }
+
+let zero () : State = { 
+    Player = Guest { Name = ""; Balance = 1000m }
+    Current = newGame ()
+    History = []
+    Page = Main }
 
 let race () = shuffle horses
 

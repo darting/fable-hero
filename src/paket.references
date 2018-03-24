@@ -3,4 +3,5 @@ Fable.Core
 Fable.Import.Browser
 Fable.Elmish.React
 Fable.Elmish.Browser
+Fable.PowerPack
 dotnet-fable
